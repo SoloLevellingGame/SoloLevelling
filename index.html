@@ -1,0 +1,86 @@
+<!DOCTYPE html><!--Указываем версию вебстраницы-->
+<html><!--Корневой элемент HTML страницы-->
+	     <head><!--Метаданные страницы-->
+		        <meta charset="UTF-8"><!--Устанавливаем кодировку UTF-8-->
+          <!--initial-scale=1.0 это initial-scale=100%. Он устанавливает начальный уровень масштабирования
+          при первой загрузке страницы. viewport(Область просмотра) - это видимая пользователем область
+          веб-страницы. width=device-width задает ширину страницы, соответствующую ширине экрана устройства\-->
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+          <title>Minecraft</title><!--Имя веб страницы-->
+          <link rel="icon" href="Images/GameIcon.png"><!--Иконка веб страницы-->
+          <!--Подключаем вспомогательные библиотеки-->
+          <script src="Libs/JQuery.js"></script>
+          <script src="Libs/GLMatrix.js"></script>
+      </head>
+      <body><!--Содержимое(тело) документа-->
+          <!--Первым тегом в паре есть начальный тег, второй - конечный тег-->
+          <h1>Добро пожаловать в Minecraft!</h1>
+          <!--Объявляем канвас(холст) HTML страницы для осуществления рендеринга по указаным параметрам-->
+          <canvas id="Canvas" width="1000" height="600"></canvas>
+          <div id="UIContainer">
+               <div id="MenuInterface">
+                    <div id="GraphicsColor">
+                         <div class="gman-widget-outer">
+                              <div class="gman-widget-label">Цвет игрового фона: </div>
+                              <div class="gman-widget-value">null</div>
+                              <input class="gman-widget-slider" type="range" min="0" max="1" value="0">
+                         </div>
+                    </div>
+                    <div id="y">
+                         <div class="gman-widget-outer">
+                           <div class="gman-widget-label">y</div>
+                           <div class="gman-widget-value">118</div>
+                           <input class="gman-widget-slider" type="range" min="0" max="298" value="150">
+                         </div>
+                    </div>
+                    <div id="angle">
+                         <div class="gman-widget-outer">
+                           <div class="gman-widget-label">angle</div>
+                           <div class="gman-widget-value">277</div>
+                           <input class="gman-widget-slider" type="range" min="0" max="360" value="0">
+                         </div>
+                    </div>
+                    <div id="scaleX">
+                         <div class="gman-widget-outer">
+                           <div class="gman-widget-label">scaleX</div>
+                           <div class="gman-widget-value">-5.00</div>
+                           <input class="gman-widget-slider" type="range" min="-500" max="500" value="100">
+                         </div>
+                    </div>
+                    <div id="scaleY">
+                         <div class="gman-widget-outer">
+                           <div class="gman-widget-label">scaleY</div>
+                           <div class="gman-widget-value">2.48</div>
+                           <input class="gman-widget-slider" type="range" min="-500" max="500" value="100">
+                         </div>
+                    </div>
+               </div>
+         </div>
+         <!--Задача фрагментного шейдера - вычислять цвет для каждой вершины-->
+         <!--Пространство отсечения - Матрица проекции трансформирует координаты диапазона в 
+         нормализованные координаты(-1.0, 1.0), вне зависимости от Canvas размера.-->
+         <!--Задача вершинного шейдера - вычислять положения вершин(пространство отсечения)-->
+         <!--Буфферы это - массивы бинарных данных, загруженных в графический процессор-->
+          <!--Атрибуты нужны для загрузки данных буфера в вершинный шейдер-->
+          <!--Uniform-переменные - это глобальные переменные, которые устанавливаются перед выполнением
+          программы шейдера.-->
+          <!--Varying-переменные позволяют передавать данные из вершинного шейдера фрагментному шейдеру.-->
+          <!--angle это - направление-->
+          <!--Растеризация - отрисовка объекта пикселями-->
+          <!--Точность фрагментного шейдера - это количество пикселей которое необходимо-->
+          <!--Это нужно для выполнения функции glDrawArrays или glDrawElements-->
+          <!--Точки связи это - внутренние глобальные переменные в WebGL.-->
+          <!------------------------------------------------------------------------------>
+          <!--Для координации в 2d пространстве будем использовать пиксельные координаты-->
+          <!--Определяем вершинные и фрагментные шейдеры-->
+          <!--Для хранения шейдеров мы будем использовать шаблонные строки-->
+          <script src="Shaders/FragmentShadersSource.fs"></script>
+          <script src="Shaders/VertexShadersSource.vs"></script>
+          <script src="JavaScript/Shader.js"></script><!--Подключаем файл ресурсов-->
+          <script src="JavaScript/WebGLUtils.js"></script><!--Полезные функции WebGL-->
+          <script src="JavaScript/WebGL.js"></script><!--Подключаем файл WebGL-->
+          <!--console.log("%c%s", 'color:blue;font-weight:bold;', 'for more about webgl-utils.js see:');  // eslint-disable-line-->
+          <script src="JavaScript/Main.js"></script><!--Подключаем главный WebGL файл-->
+          <link rel="stylesheet" href="Css/Style.css"><!--Стиль веб страницы-->
+      </body>
+</html>
